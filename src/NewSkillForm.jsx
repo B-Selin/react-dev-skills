@@ -14,16 +14,18 @@ export default function NewSkillForm({ addSkill }) {
   const [newSkill, setNewSkill] = useState(initialSkill);
 
 
-  // creating the handleAddSkill function
+  // creating the handleAddSkill function, evt parameter is the submit events
   function handleAddSkill(evt) {
-    evt.preventDefault();
-    addSkill(newSkill);
-    setNewSkill(initialSkill);
+    evt.preventDefault();  // prevent the default form submission behavior which would refresh the page
+    addSkill(newSkill); //call addSkill and passes it the newSkill state variable which holds the data from the form
+    setNewSkill(initialSkill); // reset the newSkill state back to some initial value after submitting
   }
 
+  // creating handleChange function, event objewvt is the parameter
   function handleChange(evt) {
-    const newSkillData = { ...newSkill, [evt.target.name]: evt.target.value };
-    setNewSkill(newSkillData)
+    //create a new object called newSkillData that contains the existing newSkill state object, along with dynamically setting the key [evt.target.name] to the updated value from evt.target.value
+    const newSkillData = { ...newSkill, [evt.target.name]: evt.target.value }; //evt.target.name is in square brackets cause it will be the object[evt.target.name]
+    setNewSkill(newSkillData) // call setNewSkill to update the newSkill state with the updated object
   }
 
   return (
@@ -31,16 +33,16 @@ export default function NewSkillForm({ addSkill }) {
       <form onSubmit={handleAddSkill} className="NewSkillForm">
         <label> Skill </label>
         <input
-          value={newSkill.name}
-          onChange={handleChange}
-          name="name"
+          value={newSkill.name} // necessary, also we are using fancy brackets here because we are embedding JS expressions 
+          onChange={handleChange} // necessary
+          name="name" // has to match the object key:value names
           type="text"
         />
         <label>Level</label>
         <select
-          value={newSkill.level}
-          onChange={handleChange}
-          name="level"
+          value={newSkill.level} // necessary
+          onChange={handleChange} // necessary
+          name="level" // has to match the object key:value names
         >
           <option value={1}>1</option>
           <option value={2}>2</option>
